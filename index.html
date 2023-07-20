@@ -19,7 +19,7 @@
                     <h1 id="platform-title">Libraire</h1>
 
                     <!-- Form for registering a new account -->
-                    <form id="user-registration-form">
+                    <form id="user-registration-form" novalidate>
                         <fieldset>
                             <label for="email-input-el"> Email: </label>
                             <input
@@ -28,6 +28,9 @@
                                 name="email"
                                 required
                             />
+                            <span class="field-error-message" id="email-error"
+                                >Lorem ipsum dolor sit</span
+                            >
                         </fieldset>
 
                         <fieldset>
@@ -40,8 +43,6 @@
                                 <option value="uk">United Kingdom</option>
                                 <option value="germany">Germany</option>
                                 <option value="france">France</option>
-                                <option value="australia">Australia</option>
-                                <option value="japan">Japan</option>
                             </select>
                         </fieldset>
 
@@ -53,6 +54,10 @@
                                 name="zipcode"
                                 required
                             />
+                            <span class="field-error-message" id="zipcode-error"
+                                >Lorem ipsum dolor sit, amet consectetur
+                                adipisicing elit. Neque, odit.</span
+                            >
                         </fieldset>
 
                         <fieldset>
@@ -61,8 +66,16 @@
                                 type="password"
                                 id="password-input-el"
                                 name="password"
+                                pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,20}$"
+                                minlength="8"
+                                maxlength="20"
                                 required
                             />
+                            <span
+                                class="field-error-message"
+                                id="password-error"
+                                >Lorem ipsum dolor sit</span
+                            >
                         </fieldset>
 
                         <fieldset>
@@ -72,9 +85,14 @@
                             <input
                                 type="password"
                                 id="password-retype-input-el"
-                                name="password"
+                                name="retyped-password"
                                 required
                             />
+                            <span
+                                class="field-error-message"
+                                id="retype-password-error"
+                                >Lorem ipsum dolor sit</span
+                            >
                         </fieldset>
 
                         <button type="submit">Register</button>
@@ -117,9 +135,12 @@
                 </nav>
 
                 <section id="footer-secondary-content">
-                    <p id="footer-info">Some date and copyright</p>
+                    <p id="footer-info">
+                        <span id="date-el">2020</span> Knguyen and Co.
+                    </p>
                 </section>
             </footer>
         </div>
+        <script src="app.js"></script>
     </body>
 </html>
