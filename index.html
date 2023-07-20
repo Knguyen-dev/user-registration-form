@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>User Registration</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="content">
+            <header id="page-header">
+                <h2 id="page-title">User Registration!</h2>
+                <p id="page-desc">
+                    Brought to you by the same people who made cold pencils
+                </p>
+            </header>
+            <div class="main-content">
+                <section class="form-container">
+                    <h1 id="platform-title">Libraire</h1>
+
+                    <!-- Form for registering a new account -->
+                    <form id="user-registration-form">
+                        <fieldset>
+                            <label for="email-input-el"> Email: </label>
+                            <input
+                                type="email"
+                                id="email-input-el"
+                                name="email"
+                                required
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label for="country-input-el"> Country: </label>
+                            <select id="country-input-el" name="country">
+                                <option value="united states">
+                                    United States
+                                </option>
+                                <option value="canada">Canada</option>
+                                <option value="uk">United Kingdom</option>
+                                <option value="germany">Germany</option>
+                                <option value="france">France</option>
+                                <option value="australia">Australia</option>
+                                <option value="japan">Japan</option>
+                            </select>
+                        </fieldset>
+
+                        <fieldset>
+                            <label for="zipcode-input-el"> Zip Code: </label>
+                            <input
+                                type="text"
+                                id="zipcode-input-el"
+                                name="zipcode"
+                                required
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label for="password-input-el"> Password: </label>
+                            <input
+                                type="password"
+                                id="password-input-el"
+                                name="password"
+                                required
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label for="password-retype-input-el">
+                                Retype Password:
+                            </label>
+                            <input
+                                type="password"
+                                id="password-retype-input-el"
+                                name="password"
+                                required
+                            />
+                        </fieldset>
+
+                        <button type="submit">Register</button>
+                    </form>
+
+                    <hr class="solid-divider" />
+
+                    <!-- Or login to an already existing account -->
+                    <section id="login-account-redirect-section">
+                        <span id="login-redirect-message"
+                            >Already have an account?
+                            <a class="login-page-link" href="#">Login</a></span
+                        >
+                    </section>
+                </section>
+            </div>
+
+            <footer id="page-footer">
+                <nav id="footer-nav">
+                    <ul id="footer-nav-list">
+                        <li class="footer-nav-list-item">
+                            <a href="#">About</a>
+                        </li>
+                        <li class="footer-nav-list-item">
+                            <a href="#">Blog</a>
+                        </li>
+                        <li class="footer-nav-list-item">
+                            <a href="#">Jobs</a>
+                        </li>
+                        <li class="footer-nav-list-item">
+                            <a href="#">Privacy</a>
+                        </li>
+                        <li class="footer-nav-list-item">
+                            <a href="#">Terms</a>
+                        </li>
+                        <li class="footer-nav-list-item">
+                            <a href="#">Metaverse</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <section id="footer-secondary-content">
+                    <p id="footer-info">Some date and copyright</p>
+                </section>
+            </footer>
+        </div>
+    </body>
+</html>
