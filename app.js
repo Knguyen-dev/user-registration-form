@@ -1,3 +1,5 @@
+import * as utils from "./utilities.js";
+
 // IIFE that returns important dom elements that are going to be used
 const DomElements = (() => {
     // Get our form and its html control elements
@@ -17,13 +19,10 @@ const DomElements = (() => {
     const retypePasswordErrorEl = document.getElementById(
         "retype-password-error"
     );
-    // Create an array that contains all error elements for operations that require all of them to be used
-    const fieldErrorsList = [
-        emailErrorEl,
-        zipCodeErrorEl,
-        passwordErrorEl,
-        retypePasswordErrorEl,
-    ];
+
+    // Get the modal exit button and link it to the hide modal function
+    const exitModalBtn = document.getElementById("exit-modal-btn");
+    exitModalBtn.addEventListener("click", utils.hideModal);
 
     /*
 	+ For each of the form fields. We create an event listener for each of our text fields
@@ -98,23 +97,17 @@ const DomElements = (() => {
         }
     });
 
-    // Get span containing date for the footer
-    const dateEl = document.getElementById("date-el");
-
     // Create appropriate event listener for form
     registrationForm.addEventListener("submit", (e) => {
         e.preventDefault();
-
-        // If form is valid
+        // If form is valid, show them the success screen and also reset the state of the form
         if (validateRegistrationForm(e)) {
-            console.log("Valid form submission");
+            utils.showModal();
+            resetRegistrationForm();
         } else {
             // Else form isn't valid so we show the errors that the form has
-            console.log("Invalid form submission");
             showRegistrationFormErrors();
         }
-
-        // Pretend we submit the form to some data base for processing at the end
     });
 
     return {
@@ -128,8 +121,7 @@ const DomElements = (() => {
         zipCodeErrorEl,
         passwordErrorEl,
         retypePasswordErrorEl,
-        fieldErrorsList,
-        dateEl,
+        exitModalBtn,
     };
 })();
 
@@ -203,14 +195,14 @@ function showEmailErrors() {
     // Add class to make sure email error element is visible
     DomElements.emailErrorEl.classList.remove("content-hidden");
     // Add styling to show the inputEmailEl element has invalid input
-    addInvalidInputStyle(DomElements.inputEmailEl);
+    utils.addInvalidInputStyle(DomElements.inputEmailEl);
 }
 
 // Hide the email error on the form
 function hideEmailErrors() {
     // Add class to make emailErrorEl not visible; then add styling to show that
     DomElements.emailErrorEl.classList.add("content-hidden");
-    addValidInputStyle(DomElements.inputEmailEl);
+    utils.addValidInputStyle(DomElements.inputEmailEl);
 }
 
 // Shows zipcode errors on the form
@@ -222,13 +214,13 @@ function showZipCodeErrors() {
     }
     // Make error visible and visually indicate the input field is invalid
     DomElements.zipCodeErrorEl.classList.remove("content-hidden");
-    addInvalidInputStyle(DomElements.inputZipCodeEl);
+    utils.addInvalidInputStyle(DomElements.inputZipCodeEl);
 }
 
 // Hides zipcode errors on the form
 function hideZipCodeErrors() {
     DomElements.zipCodeErrorEl.classList.add("content-hidden");
-    addValidInputStyle(DomElements.inputZipCodeEl);
+    utils.addValidInputStyle(DomElements.inputZipCodeEl);
 }
 
 // Shows an 'password' field errors on the form.
@@ -246,13 +238,13 @@ function showPasswordErrors() {
         DomElements.passwordErrorEl.textContent = `Must have ${minLength} to ${maxLength} characters, and alphanumeric`;
     }
     DomElements.passwordErrorEl.classList.remove("content-hidden");
-    addInvalidInputStyle(DomElements.inputPasswordEl);
+    utils.addInvalidInputStyle(DomElements.inputPasswordEl);
 }
 
 // Hides 'password' field errors on the form
 function hidePasswordErrors() {
     DomElements.passwordErrorEl.classList.add("content-hidden");
-    addValidInputStyle(DomElements.inputPasswordEl);
+    utils.addValidInputStyle(DomElements.inputPasswordEl);
 }
 
 // Shows the errors for 'retype' password field; tells user that passwords don't match
@@ -262,13 +254,13 @@ function showRetypePasswordErrors() {
     DomElements.retypePasswordErrorEl.textContent =
         "Your passwords don't match!";
     DomElements.retypePasswordErrorEl.classList.remove("content-hidden");
-    addInvalidInputStyle(DomElements.inputRetypePasswordEl);
+    utils.addInvalidInputStyle(DomElements.inputRetypePasswordEl);
 }
 
 // Hides errors for the 'retype' password field
 function hideRetypePasswordErrors() {
     DomElements.retypePasswordErrorEl.classList.add("content-hidden");
-    addValidInputStyle(DomElements.inputRetypePasswordEl);
+    utils.addValidInputStyle(DomElements.inputRetypePasswordEl);
 }
 
 // Displays all of the current errors with the form; useful for when the user submits the form
@@ -301,34 +293,29 @@ function showRegistrationFormErrors() {
     }
 }
 
-// Adds style to a given input field to indicate it has valid input; also removes invalid style
-function addValidInputStyle(inputEl) {
-    inputEl.classList.remove("invalid-input");
-    inputEl.classList.add("valid-input");
-}
-
-// Adds style to a given input field to indicate it has invalid input; also removes valid style
-function addInvalidInputStyle(inputEl) {
-    inputEl.classList.remove("valid-input");
-    inputEl.classList.add("invalid-input");
-}
-
 // Hides all error elements for the registration form; useful for when page loads or maybe in functionality
 // where you want to reset a form if that's going to be created.
 function hideRegistrationFormErrors() {
-    DomElements.fieldErrorsList.forEach((errorEl) => {
+    const fieldErrorsList = document.querySelectorAll(".field-error-message");
+    fieldErrorsList.forEach((errorEl) => {
         errorEl.classList.add("content-hidden");
     });
 }
 
-// Updates the date of the footer
-function updateFooterDate() {
-    const currentYear = new Date().getFullYear();
-    DomElements.dateEl.textContent = currentYear;
+// Resets form back to its original state by resetting all fields
+function resetRegistrationForm() {
+    DomElements.registrationForm.reset(); // Reset the form and clear all fields
+    const inputElements = document.querySelectorAll("input"); // Get all input elements, and remove the .valid-input and .invalid-input classes from them
+    inputElements.forEach((inputEl) => {
+        inputEl.classList.remove("invalid-input");
+        inputEl.classList.remove("valid-input");
+    });
+    hideRegistrationFormErrors(); // Hide error elements in the registration form
 }
 
 // When the window loads we update the footer and hide the errors for the registration form
 window.addEventListener("DOMContentLoaded", () => {
-    updateFooterDate();
-    hideRegistrationFormErrors();
+    utils.updateFooterDate(); // updates footer date on the project
+    utils.hideModal(); // hides our modal that we will show when user successfully completes form
+    resetRegistrationForm(); // resets and makes sure registration form is a blank slate
 });

@@ -8,6 +8,18 @@
     </head>
     <body>
         <div class="content">
+            <!-- Markup for the congratulation screen  -->
+            <div id="blur-overlay"></div>
+            <div id="modal">
+                <h2>Successful submission!</h2>
+                <p>
+                    Good job you submitted a valid form and it successfully
+                    'submitted'!
+                </p>
+                <button id="exit-modal-btn">Exit</button>
+            </div>
+
+            <!-- Rest of the actual site -->
             <header id="page-header">
                 <h2 id="page-title">User Registration!</h2>
                 <p id="page-desc">
@@ -140,6 +152,6 @@
                 </section>
             </footer>
         </div>
-        <script src="app.js"></script>
+        <script type="module" src="app.js"></script>
     </body>
 </html>

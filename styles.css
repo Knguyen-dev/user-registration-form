@@ -25,6 +25,15 @@ button {
     cursor: pointer;
     transition: var(--transition);
     border-style: solid;
+    font-weight: bold;
+}
+
+button,
+#modal,
+.form-container,
+.field-error-message,
+input {
+    border-radius: var(--border-radius);
 }
 
 .solid-divider {
@@ -41,6 +50,7 @@ button {
     --bg-clr-blue: #3b82f6;
     --bg-clr-dark-sky: #0c4a6e;
     --bg-clr-light-lime: #bef264;
+    --bg-clr-light-sky: #38bdf8;
 
     --bg-clr-red: #b91c1c;
     --font-clr-black: black;
@@ -59,10 +69,50 @@ body {
 }
 
 .content {
+    position: relative; /*Positioned relative for a blur overlay and modal*/
     display: grid;
     height: 100vh;
     grid-template-rows: auto 1fr auto;
     /* grid-template-columns: 1fr auto; */
+}
+
+/* Overlay and modal styling */
+#blur-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    z-index: 1;
+}
+#modal {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 12px;
+    background-color: var(--bg-clr-light-sky);
+    color: var(--font-clr-dark-blue);
+    width: 30%;
+    height: auto;
+    text-align: center;
+}
+
+#exit-modal-btn {
+    margin-top: 12px;
+    padding: 6px 12px;
+    font-size: 16px;
+    letter-spacing: var(--letter-spacing);
+
+    background-color: transparent;
+    color: var(--font-clr-dark-blue);
+}
+
+#exit-modal-btn:hover {
+    background-color: black;
+    color: white;
 }
 
 #page-header,
@@ -94,7 +144,6 @@ body {
     padding: 16px;
     height: auto;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    border-radius: var(--border-radius);
 }
 #platform-title {
     letter-spacing: var(--letter-spacing);
@@ -107,7 +156,7 @@ fieldset {
     margin-bottom: 8px;
     display: flex;
     flex-direction: column;
-    align-items: fle;
+    align-items: center; /*Make sure of this later because it was set to 'fle'*/
     text-align: center;
 }
 
@@ -125,7 +174,6 @@ label span {
     background-color: var(--bg-clr-red);
     color: var(--font-clr-white);
     padding: 4px;
-    border-radius: var(--border-radius);
     font-size: 70%;
 }
 
@@ -133,7 +181,6 @@ input {
     display: block;
     padding: 4px;
     border-style: solid;
-    border-radius: var(--border-radius);
     width: 100%;
     margin-bottom: 5px;
 }
@@ -152,7 +199,6 @@ button[type="submit"] {
     background-color: transparent;
     color: var(--font-clr-black);
     padding: 12px 6px;
-    border-radius: var(--border-radius);
     width: 100%;
     margin: 0 auto;
     font-weight: 700;
