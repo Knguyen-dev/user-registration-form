@@ -5,3 +5,5 @@
 *   That means highlighting a field red and providing a helpful error message until it has been filled in properly.
 *   For the sake of this lesson, make sure all of the validation occurs in the JavaScript file. Form doesn't actually need to submit, but if there are errors show them when they try to submit it. If it's successful, give user a success message. Also make sure your functions validate as the user progresses
     through the form, so hwen user leaves a field it should auto-evaluate
+
+-   Book Mark: Seems to be able to detect good from bad form submissions. So next is just getting those errors up on the screen. Maybe don't wnat all errors resizing so we need
