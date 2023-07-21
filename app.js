@@ -185,8 +185,11 @@ function isMatchingPasswords() {
 
 /*
 + NOTE: Our "showError" functions like "showEmailError", etc. assume that a check has already been done
-to see that the relevant error has already happened. So these fucntions just edit the text and make the 
-errors visible on the page.
+to see that the relevant error has already happened. 
+	1. Decide which error is responsible
+	2. Edit text to indicate the type of error
+	3. Make the error message visible 
+	4. Change the visual style of the field!
 */
 
 // Shows the email errors on the form
@@ -199,12 +202,15 @@ function showEmailErrors() {
     }
     // Add class to make sure email error element is visible
     DomElements.emailErrorEl.classList.remove("content-hidden");
+    // Add styling to show the inputEmailEl element has invalid input
+    addInvalidInputStyle(DomElements.inputEmailEl);
 }
 
 // Hide the email error on the form
 function hideEmailErrors() {
-    // Add class to make emailErrorEl not bisible
+    // Add class to make emailErrorEl not visible; then add styling to show that
     DomElements.emailErrorEl.classList.add("content-hidden");
+    addValidInputStyle(DomElements.inputEmailEl);
 }
 
 // Shows zipcode errors on the form
@@ -214,13 +220,15 @@ function showZipCodeErrors() {
     } else if (!validateZipCode()) {
         DomElements.zipCodeErrorEl.textContent = `Zipcode invalid for ${DomElements.countrySelectEl.value}`;
     }
-    // Add class to make the zipcode error visible
+    // Make error visible and visually indicate the input field is invalid
     DomElements.zipCodeErrorEl.classList.remove("content-hidden");
+    addInvalidInputStyle(DomElements.inputZipCodeEl);
 }
 
 // Hides zipcode errors on the form
 function hideZipCodeErrors() {
     DomElements.zipCodeErrorEl.classList.add("content-hidden");
+    addValidInputStyle(DomElements.inputZipCodeEl);
 }
 
 // Shows an 'password' field errors on the form.
@@ -238,11 +246,13 @@ function showPasswordErrors() {
         DomElements.passwordErrorEl.textContent = `Must have ${minLength} to ${maxLength} characters, and alphanumeric`;
     }
     DomElements.passwordErrorEl.classList.remove("content-hidden");
+    addInvalidInputStyle(DomElements.inputPasswordEl);
 }
 
 // Hides 'password' field errors on the form
 function hidePasswordErrors() {
     DomElements.passwordErrorEl.classList.add("content-hidden");
+    addValidInputStyle(DomElements.inputPasswordEl);
 }
 
 // Shows the errors for 'retype' password field; tells user that passwords don't match
@@ -252,11 +262,13 @@ function showRetypePasswordErrors() {
     DomElements.retypePasswordErrorEl.textContent =
         "Your passwords don't match!";
     DomElements.retypePasswordErrorEl.classList.remove("content-hidden");
+    addInvalidInputStyle(DomElements.inputRetypePasswordEl);
 }
 
 // Hides errors for the 'retype' password field
 function hideRetypePasswordErrors() {
     DomElements.retypePasswordErrorEl.classList.add("content-hidden");
+    addValidInputStyle(DomElements.inputRetypePasswordEl);
 }
 
 // Displays all of the current errors with the form; useful for when the user submits the form
@@ -287,6 +299,18 @@ function showRegistrationFormErrors() {
     } else {
         showRetypePasswordErrors();
     }
+}
+
+// Adds style to a given input field to indicate it has valid input; also removes invalid style
+function addValidInputStyle(inputEl) {
+    inputEl.classList.remove("invalid-input");
+    inputEl.classList.add("valid-input");
+}
+
+// Adds style to a given input field to indicate it has invalid input; also removes valid style
+function addInvalidInputStyle(inputEl) {
+    inputEl.classList.remove("valid-input");
+    inputEl.classList.add("invalid-input");
 }
 
 // Hides all error elements for the registration form; useful for when page loads or maybe in functionality

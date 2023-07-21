@@ -36,22 +36,11 @@ button {
     display: none;
 }
 
-/* Remember these valid and invalid styles */
-/* input:valid {
-    border-color: green;
-}
-input:invalid {
-    border-color: var(--bg-clr-red);
-}
-input:focus:invalid {
-    outline: none;
-} */
-
 :root {
     --bg-clr-light-blue: #38bdf8;
     --bg-clr-blue: #3b82f6;
     --bg-clr-dark-sky: #0c4a6e;
-    --bg-clr-light-slate: #cbd5e1;
+    --bg-clr-light-lime: #bef264;
 
     --bg-clr-red: #b91c1c;
     --font-clr-black: black;
@@ -147,6 +136,16 @@ input {
     border-radius: var(--border-radius);
     width: 100%;
     margin-bottom: 5px;
+}
+.valid-input {
+    border-color: var(--bg-clr-light-lime);
+}
+.invalid-input {
+    border-color: var(--bg-clr-red);
+}
+
+input:focus:invalid {
+    outline: none;
 }
 
 button[type="submit"] {
