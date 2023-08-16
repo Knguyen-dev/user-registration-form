@@ -35,7 +35,7 @@ function createPageHeader() {
     const pageDescEl = document.createElement("p");
     pageDescEl.id = "page-desc";
     pageDescEl.textContent =
-        "Brought to you by the smae people who made cold pencils!";
+        "Brought to you by the same people who made cold pencils!";
 
     header.appendChild(pageTitleEl);
     header.appendChild(pageDescEl);
@@ -50,7 +50,7 @@ function createFormField(fieldObj) {
     label.textContent = fieldObj.labelText;
 
     // If we're creating a select drop down
-    if (fieldObj.type == "select") {
+    if (fieldObj.inputType == "select") {
         const selectEl = document.createElement("select");
         selectEl.id = fieldObj.inputID;
         selectEl.name = fieldObj.inputName;
@@ -102,7 +102,7 @@ function createRegistrationForm() {
     const fields = [
         {
             labelText: "Email:",
-            type: "email",
+            inputType: "email",
             inputID: "email-input-el",
             inputName: "email",
             isRequired: true,
@@ -110,7 +110,7 @@ function createRegistrationForm() {
         },
         {
             labelText: "Country:",
-            type: "select",
+            inputType: "select",
             inputID: "country-input-el",
             inputName: "country",
             options: [
@@ -123,7 +123,7 @@ function createRegistrationForm() {
         },
         {
             labelText: "Zip Code:",
-            type: "text",
+            inputType: "text",
             inputID: "zipcode-input-el",
             inputName: "zipcode",
             isRequired: true,
@@ -131,7 +131,7 @@ function createRegistrationForm() {
         },
         {
             labelText: "Password:",
-            type: "password",
+            inputType: "password",
             inputID: "password-input-el",
             inputName: "password",
             pattern: "^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{8,12}$",
@@ -142,7 +142,7 @@ function createRegistrationForm() {
         },
         {
             labelText: "Retype Password:",
-            type: "password",
+            inputType: "password",
             inputID: "password-retype-input-el",
             inputName: "retyped-password",
             isRequired: true,
@@ -228,7 +228,7 @@ function createPageFooter() {
     const footerSubContent = document.createElement("section");
     footerSubContent.id = "footer-sub-content";
     footerSubContent.innerHTML = `<p id="footer-info">
-		<span id="date-el">${new Date().getFullYear}</span> Knguyen and Co.
+		<span id="date-el">${new Date().getFullYear()}</span> Knguyen and Co.
 	</p>`;
 
     footerNav.appendChild(linksList);

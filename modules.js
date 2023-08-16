@@ -25,6 +25,12 @@ const DomModule = (() => {
     const retypePasswordErrorEl = document.getElementById(
         "retype-password-error"
     );
+
+    // Get all input elements
+    const inputElements = document.querySelectorAll("input");
+    // Get all error elements
+    const errorElements = document.querySelectorAll(".field-error-message");
+
     // Get the modal exit button and link it to the hide modal function
     const exitModalBtn = document.getElementById("exit-modal-btn");
 
@@ -41,6 +47,8 @@ const DomModule = (() => {
         zipCodeErrorEl,
         passwordErrorEl,
         retypePasswordErrorEl,
+        inputElements,
+        errorElements,
         exitModalBtn,
     };
 })();
